@@ -1,6 +1,7 @@
 package fuzs.universalbonemeal.handler;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import fuzs.universalbonemeal.world.level.block.behavior.BonemealBehavior;
 import net.minecraft.core.BlockPos;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.HashMap;
 import java.util.List;
@@ -128,7 +128,6 @@ public class BonemealHandler {
             this.tag = tag;
         }
 
-        @SuppressWarnings("deprecation")
         @Override
         public void compile(Map<Block, BonemealBehavior> map) {
             for (Holder<Block> value : Registry.BLOCK.getTagOrEmpty(this.tag)) {
