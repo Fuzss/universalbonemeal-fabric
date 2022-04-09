@@ -21,6 +21,15 @@ public abstract class BoneMealItemMixin extends Item {
     @Inject(method = "growCrop", at = @At("HEAD"), cancellable = true)
     private static void growCrop$head(ItemStack itemStack, Level level, BlockPos blockPos, CallbackInfoReturnable<Boolean> callbackInfo) {
         InteractionResult result = BonemealCallback.EVENT.invoker().onBonemeal(level, blockPos, level.getBlockState(blockPos), itemStack);
-        if (result != InteractionResult.PASS) callbackInfo.setReturnValue(result == InteractionResult.SUCCESS);
+        if (result != InteractionResult.PASS) {
+            if (result == InteractionResult.SUCCESS) {
+                if (!level.isClientSide) {
+                    itemStack.shrink(1);
+                }
+                callbackInfo.setReturnValue(true);
+            } else {
+                callbackInfo.setReturnValue(false);
+            }
+        }
     }
 }
